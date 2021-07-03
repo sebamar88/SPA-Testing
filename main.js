@@ -66,7 +66,7 @@ pricingLink.addEventListener('click', (e)=>{
     }
 }) */
 document.addEventListener('DOMContentLoaded', ()=>{
-//TODO: Eliminar hasta la linea 85 inclusive
+//TODO: Eliminar hasta la linea 139 inclusive
 
 let pedirNombre = prompt('Ingresa tu nombre completo:')
 
@@ -78,7 +78,62 @@ const Saludo = (nombre) => {
     alert('Bienvenido ' + nombre + ', Cuanto tiempo sin verte!')
 }
 
+class Compra{
+    constructor(product, quantity, shop){
+        this.product = product,
+        this.quantity = parseInt(quantity),
+        this.shop = shop
+    }
+    Items(){
+        return `Deseas comprar ${this.quantity} ${this.product} de la tienda ${this.shop}. Su pedido ha sido tomado`
+    }
+
+}
+let cantidadProductos;
 if(pedirNombre){
     Saludo(pedirNombre)
+    cantidadProductos = parseInt(prompt(`Bueno ${pedirNombre},cuantos productos diferentes desea comprar?`))
 }
+
+let counter = 0;
+const listadoPedidos = [];
+
+while(isNaN(cantidadProductos)){
+    cantidadProductos = parseInt(prompt('Debe ingresar un valor numerico. Cuantos productos diferentes desea comprar?'))
+}
+
+while(counter < cantidadProductos){
+    const prod = prompt('Ingrese un producto que desee comprar:')
+    const qt = parseInt(prompt('Cuanto de ese producto desea comprar?'))
+    const store = prompt('Donde quiere que vayamos a conseguirlo?')
+
+    const producto = new Compra(prod, qt, store);  
+    
+    listadoPedidos.push(producto)
+    
+    counter++;
+}
+
+listadoPedidos.sort((a, b) => (a.quantity > b.quantity) ? 1 : -1)
+
+const pedidoCompleto = (pedidos) => {
+    let pedidoListos = '';
+    pedidos.forEach(pedido =>{
+        pedidoListos += pedido.quantity + ' x ' + pedido.product + ' comprados en ' + pedido.shop + '\n'
+    })
+    return pedidoListos;
+}
+
+
+if(counter === cantidadProductos){
+    alert(`
+    ${pedirNombre}, gracias por tu compra de:
+    ${pedidoCompleto(listadoPedidos)}
+    `)
+}
+
+
+
+/* console.log(listadoPedidos) */
+
 })
