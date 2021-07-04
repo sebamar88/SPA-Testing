@@ -77,22 +77,24 @@ while(pedirNombre === '' || pedirNombre === null){
 const Saludo = (nombre) => {
     alert('Bienvenido ' + nombre + ', Cuanto tiempo sin verte!')
 }
-
 class Compra{
     constructor(product, quantity, shop){
-        this.product = product,
-        this.quantity = parseInt(quantity),
-        this.shop = shop
+        return {
+            product : product,
+            quantity : parseInt(quantity),
+            shop : shop,
+            Items: () =>{
+                return `${quantity} x ${product} comprados en ${shop}.`
+            }
+        }
     }
-    Items(){
-        return `Deseas comprar ${this.quantity} ${this.product} de la tienda ${this.shop}. Su pedido ha sido tomado`
-    }
+    
 
 }
 let cantidadProductos;
 if(pedirNombre){
     Saludo(pedirNombre)
-    cantidadProductos = parseInt(prompt(`Bueno ${pedirNombre},cuantos productos diferentes desea comprar?`))
+    cantidadProductos = parseInt(prompt(`Bueno ${pedirNombre}, cuantos productos diferentes desea comprar?`))
 }
 
 let counter = 0;
@@ -119,7 +121,7 @@ listadoPedidos.sort((a, b) => (a.quantity > b.quantity) ? 1 : -1)
 const pedidoCompleto = (pedidos) => {
     let pedidoListos = '';
     pedidos.forEach(pedido =>{
-        pedidoListos += pedido.quantity + ' x ' + pedido.product + ' comprados en ' + pedido.shop + '\n'
+        pedidoListos += pedido.Items() + '\n'
     })
     return pedidoListos;
 }
