@@ -68,10 +68,10 @@ pricingLink.addEventListener('click', (e)=>{
 document.addEventListener('DOMContentLoaded', ()=>{
 //TODO: Eliminar hasta la linea 139 inclusive
 
-let pedirNombre = prompt('Ingresa tu nombre completo:')
+let pedirNombre = prompt('Ingresa tu nombre:')
 
-while(pedirNombre === '' || pedirNombre === null){
-    pedirNombre = prompt('Por favor ingrese un valor valido de nombre completo')
+while(pedirNombre === '' || pedirNombre === null || Number(pedirNombre)){
+    pedirNombre = prompt('Por favor ingrese un valor valido de nombre')
 }
 
 const Saludo = (nombre) => {
@@ -80,11 +80,11 @@ const Saludo = (nombre) => {
 class Compra{
     constructor(product, quantity, shop){
         return {
-            product : product,
-            quantity : parseInt(quantity),
-            shop : shop,
+            product : product || 'producto',
+            quantity : parseInt(quantity) || 1,
+            shop : shop || 'supermercado',
             Items: () =>{
-                return `${quantity} x ${product} comprados en ${shop}.`
+                return `${quantity || 1} x ${product || 'producto'} comprados en ${shop || 'supermercado'}.`
             }
         }
     }
